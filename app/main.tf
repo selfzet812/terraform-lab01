@@ -49,7 +49,7 @@ resource "aws_launch_template" "web" {
   lifecycle {
     create_before_destroy = true
   }
-  user_data = base64encode(templatefile("user_data.sh", {
+  user_data = base64encode(templatefile("${path.module}/user_data.sh.tftpl", {
     env   = var.env
     owner = var.Owner
   }))
