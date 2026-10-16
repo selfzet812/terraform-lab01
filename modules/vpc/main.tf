@@ -7,10 +7,10 @@ resource "aws_vpc" "main" {
 }
 #================SUBNETS-PUBLIC=======================
 resource "aws_subnet" "public" {
-  for_each          = var.public_subnets
-  vpc_id            = aws_vpc.main.id
-  availability_zone = each.value.az
-  cidr_block        = each.value.cidr
+  for_each                = var.public_subnets
+  vpc_id                  = aws_vpc.main.id
+  availability_zone       = each.value.az
+  cidr_block              = each.value.cidr
   map_public_ip_on_launch = true
   tags = {
     Name = "${var.name}-${each.key}"
@@ -76,12 +76,12 @@ resource "aws_eip" "nat" {
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
   dynamic "route" {
-    for_each = var.create_nat ? [1]: []
+    for_each = var.create_nat ? [1] : []
     content {
-      cidr_block = "0.0.0.0/0"
+      cidr_block     = "0.0.0.0/0"
       nat_gateway_id = aws_nat_gateway.nat[0].id
-  }
     }
+  }
   tags = {
     Name = var.name
   }
