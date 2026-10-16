@@ -27,7 +27,7 @@ variable "create_nat" {
 
 variable "region" {
   description = "Region"
-  type = string
+  type        = string
 }
 
 locals {

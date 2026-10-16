@@ -36,7 +36,7 @@ resource "aws_vpc_security_group_egress_rule" "all" {
 #=========================
 
 resource "aws_launch_template" "web" {
-  name_prefix = local.name_prefix
+  name_prefix            = local.name_prefix
   image_id               = data.aws_ami.latest_amazon_linux.id
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.web.id]
@@ -75,7 +75,7 @@ resource "aws_autoscaling_group" "Web" {
 resource "aws_lb" "web" {
   name               = local.name_prefix
   load_balancer_type = "application"
-  security_groups    = [ aws_security_group.alb.id ]
+  security_groups    = [aws_security_group.alb.id]
   subnets            = local.public_subnet_ids
 }
 
